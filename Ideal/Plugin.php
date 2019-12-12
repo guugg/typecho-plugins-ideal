@@ -5,7 +5,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * <div class="WechatFansSet"><br /><a href="https://803344.xyz/51.html/" title="插件因兴趣于闲暇时间所写，故会有代码不规范、不专业和  bug的情况，但完美主义促使代码还说得过去，如有bug或使用问题进行反馈即可。">鼠标轻触查看备注</a>&nbsp;<a href="https://803344.xyz/zfb.jpg" target="_blank">支付宝打赏</a>&nbsp;<a href="https://803344.xyz/51.html/" target="_blank">反馈</a></div><style>.WechatFansSet a{background: #4DABFF;padding: 5px;color: #fff;}</style>
  * @package Ideal 
  * @author 小宇宙
- * @version 1.3.0
+ * @version 1.3.1
  * @link http://803344.xyz
  */
 
@@ -126,7 +126,7 @@ $Bubbling= new Radio_ideal('Bubbling',array(
         '5' => "开启动态四方块",
         '6' => "舒适感的气泡",
         '7' => "缓慢上升气球",
-    ),'1',"动态背景",("由jsdelivr提供CDN加速；<br>气泡.气球来自：萌卜兔"));
+    ),'0',"动态背景",("由jsdelivr提供CDN加速；<br>气泡.气球来自：萌卜兔"));
 $form->addInput($Bubbling);
 
 // 鼠标样式
@@ -141,7 +141,7 @@ $dir = self::STATIC_DIR . '/image';
     'sketch' => "<img src='{$dir}/sketch/normal.cur'><img src='{$dir}/sketch/link.cur'>",
     'star' => "<img src='{$dir}/star/normal.cur'><img src='{$dir}/star/link.cur'>",
     ];
-    $bubbleType = new Radio_ideal('mouseType', $options, 'exquisite', "鼠标样式");
+    $bubbleType = new Radio_ideal('mouseType', $options, 'none', "鼠标样式");
 $form->addInput($bubbleType);
 
 
@@ -178,6 +178,7 @@ $handsomecss = new Checkbox_ideal('handsomecss', array(
         'Hovering' => _t('文章列表悬停上浮'),
         'centered' => _t('文章标题居中'),
         'typechoanniu' => _t('开启文章快捷语法'),
+        'yijiandaka' => _t('评论添加一键打卡功能'),
     ), NULL, "Handsome魔改样式", NULL);
 $form->addInput($handsomecss);
 
@@ -207,16 +208,16 @@ $form->addItem(new Title_ideal('文章版权','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作
 $form->addItem(new EndSymbol_ideal(2));
 
 $form->addItem(new Title_ideal('评论拦截','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;颜色区分（默认开启,自行配置）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：<a href="http://www.yovisun.com/archive/typecho-plugin-smartspam.html/" target="_blank"> Yovis Blog</a>'));
-        $opt_length = new Radio_ideal('opt_length', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_length = new Radio_ideal('opt_length', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #de1cc6'>评论字符长度操作</span>", "如果评论中长度不符合条件，则强行按该操作执行。如果选择[无动作]，将忽略下面长度的设置");
         $form->addInput($opt_length);       
-        $length_min = new Text_ideal('length_min', NULL, '2', "<span style='color: #de1cc6'>最短字符</span>", '允许评论的最短字符数。');
+        $length_min = new Text_ideal('length_min', NULL, '1', "<span style='color: #de1cc6'>最短字符</span>", '允许评论的最短字符数。');
         $length_min->input->setAttribute('class', 'mini');
         $form->addInput($length_min);
         $length_max = new Text_ideal('length_max', NULL, '200', "<span style='color: #de1cc6'>最长字符</span>", '允许评论的最长字符数');
         $length_max->input->setAttribute('class', 'mini');
         $form->addInput($length_max);
-        $opt_ban = new Radio_ideal('opt_ban', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_ban = new Radio_ideal('opt_ban', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #FF0000'>禁止词汇操作</span>", "如果评论中包含禁止词汇列表中的词汇，将执行该操作");
         $form->addInput($opt_ban);
         $words_ban = new Textarea_ideal('words_ban', NULL, "傻逼\n操你妈\n智障\n傻子",
@@ -228,40 +229,40 @@ $form->addItem(new Title_ideal('评论拦截','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;颜
         $words_chk = new Textarea_ideal('words_chk', NULL, "http://",
 			"<span style='color: #FF9797'>敏感词汇表</span>", _t('多条词汇请用换行符隔开<br />注意：如果词汇同时出现于禁止词汇，则执行禁止词汇操作'));
         $form->addInput($words_chk);
-        $opt_au_length = new Radio_ideal('opt_au_length', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_au_length = new Radio_ideal('opt_au_length', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #FF44FF'>昵称字符长度操作</span>", "如果昵称长度不符合条件，则强行按该操作执行。如果选择[无动作]，将忽略下面长度的设置");
         $form->addInput($opt_au_length);   
         $au_length_min = new Text_ideal('au_length_min', NULL, '1', "<span style='color: #FF44FF'>昵称最短字符数</span>", '昵称允许的最短字符数。');
         $au_length_min->input->setAttribute('class', 'mini');
         $form->addInput($au_length_min);
-        $au_length_max = new Text_ideal('au_length_max', NULL, '7', "<span style='color: #FF44FF'>昵称最长字符数</span>", '昵称允许的最长字符数');
+        $au_length_max = new Text_ideal('au_length_max', NULL, '20', "<span style='color: #FF44FF'>昵称最长字符数</span>", '昵称允许的最长字符数');
         $au_length_max->input->setAttribute('class', 'mini');
         $form->addInput($au_length_max);
         $opt_nojp_au = new Radio_ideal('opt_nojp_au', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #84C1FF'>昵称日文操作</span>", "如果用户昵称中包含日文，则强行按该操作执行");
         $form->addInput($opt_nojp_au);
-        $opt_nourl_au = new Radio_ideal('opt_nourl_au', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "spam",
+        $opt_nourl_au = new Radio_ideal('opt_nourl_au', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #0072E3'>昵称网址操作</span>", "如果用户昵称是网址，则强行按该操作执行");
         $form->addInput($opt_nourl_au);
-        $opt_au = new Radio_ideal('opt_au', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "spam",
+        $opt_au = new Radio_ideal('opt_au', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #B15BFF'>屏蔽昵称关键词操作</span>", "如果评论发布者的昵称含有该关键词，将执行该操作");
         $form->addInput($opt_au);
         $words_au = new Textarea_ideal('words_au', NULL, "",
 			"<span style='color: #B15BFF'>屏蔽昵称关键词表</span>", _t('多个关键词请用换行符隔开'));
         $form->addInput($words_au);
-        $opt_ip = new Radio_ideal('opt_ip', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_ip = new Radio_ideal('opt_ip', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #FF5809'>屏蔽IP操作</span>", "如果评论发布者的IP在屏蔽IP段，将执行该操作");
         $form->addInput($opt_ip);
         $words_ip = new Textarea_ideal('words_ip', NULL, "0.0.0.0",
 			"<span style='color: #FF5809'>屏蔽IP</span>", _t('多条IP请用换行符隔开<br />支持用*号匹配IP段，如：192.168.*.*'));
         $form->addInput($words_ip);
-        $opt_mail = new Radio_ideal('opt_mail', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_mail = new Radio_ideal('opt_mail', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #4F9D9D'>屏蔽邮箱操作</span>", "如果评论发布者的邮箱与禁止的一致，将执行该操作");
         $form->addInput($opt_mail);
         $words_mail = new Textarea_ideal('words_mail', NULL, "",
 			"<span style='color: #4F9D9D'>邮箱关键词</span>", _t('多个邮箱请用换行符隔开<br />可以是邮箱的全部，或者邮箱部分关键词'));
         $form->addInput($words_mail);        
-        $opt_url = new Radio_ideal('opt_url', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "abandon",
+        $opt_url = new Radio_ideal('opt_url', array("none" => "无动作", "waiting" => "标记为待审核", "spam" => "标记为垃圾", "abandon" => "评论失败"), "waiting",
 			"<span style='color: #AFAF61'>屏蔽网址操作</span>", "如果评论发布者的网址与禁止的一致，将执行该操作。如果网址为空，该项不会起作用。");
         $form->addInput($opt_url);
         $words_url = new Textarea_ideal('words_url', NULL, "",
@@ -825,6 +826,46 @@ JS;
     }
 
     public static function footer() {
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('yijiandaka', Helper::options()->plugin('Ideal')->handsomecss)):
+        ?>
+        <script type="text/javascript">
+                function a(a, b, c) {
+                        if (document.selection) a.focus(), sel = document.selection.createRange(), c ? sel.text = b + sel.text + c : sel.text = b, a.focus();
+                        else if (a.selectionStart || "0" == a.selectionStart) {
+                            var l = a.selectionStart,
+                                m = a.selectionEnd,
+                                n = m;
+                            c ? a.value = a.value.substring(0, l) + b + a.value.substring(l, m) + c + a.value.substring(m, a.value.length) : a.value = a.value.substring(0, l) + b + a.value.substring(m, a.value.length);
+                            c ? n += b.length + c.length : n += b.length - m + l;
+                            l == m && c && (n -= c.length);
+                            a.focus();
+                            a.selectionStart = n;
+                            a.selectionEnd = n
+                        } else a.value += b + c, a.focus()
+                }
+                var b = (new Date).toLocaleTimeString(),
+                        c = document.getElementById("comment") || 0;
+                window.SIMPALED = {};
+                window.SIMPALED.Editor = {
+                    daka: function() {
+                        a(c, "滴！学生卡！打卡时间：" + b, "，请上车的乘客系好安全带~")
+                    },
+                    zan: function() {
+                        a(c, " 写得好好哟,我要给你生猴子！::funny:04:: ")
+                    },
+                    cai: function() {
+                        a(c, "骚年,我怀疑你写了一篇假的文章！::funny:03:: ")
+                    }
+                };
+            $(function(){
+                $(".OwO").after("<div class=\"OwO\" title=\"打卡\" onclick=\"javascript:SIMPALED.Editor.daka();this.style.display='none'\"><div class=\"OwO-logo\"><i class=\"fontello-pencil\"></i><span class=\"OwOlogotext\"></span></div></div><div class=\"OwO\" title=\"赞\"  onclick=\"javascript:SIMPALED.Editor.zan();this.style.display='none'\"><div class=\"OwO-logo\"><i class=\"glyphicon glyphicon-thumbs-up\"></i><span class=\"OwOlogotext\"></span></div></div><div class=\"OwO\" title=\"踩\"  onclick=\"javascript:SIMPALED.Editor.cai();this.style.display='none'\"><div class=\"OwO-logo\"><i class=\"glyphicon glyphicon-thumbs-down\"></i><span class=\"OwOlogotext\"></span></div></div>");
+                //选择 ID 为 #two 的 DIV 节点，在其后边添加一个 DIV 节点
+                $(".OwO").css("display","inline")
+            });
+		</script>
+        <?php
+        endif;
+
         // 动态彩带
         $Bubbling = Helper::options()->plugin('Ideal')->Bubbling;
         if($Bubbling == 0) {
@@ -916,6 +957,21 @@ JS;
 		<?php
         endif;
 
+    }
+
+    public static function Comments() {
+        // 动态彩带
+        ?>
+		<script type="text/javascript">
+            $(function(){
+
+                $(".OwO").after("<div>我是新添加的内容</div>");
+
+                //选择 ID 为 #two 的 DIV 节点，在其后边添加一个 DIV 节点
+                $(".OwO").css("display","inline")
+            });
+		</script>
+        <?php    
     }
     
 }
