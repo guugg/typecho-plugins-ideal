@@ -5,7 +5,9 @@ Typecho beautification plug-in based on handsome theme and other functions.   ht
 > 更新到1.3.1
 
 -  新增handsome评论一键打卡功能
-
+-  魔改样式的都默认为 关闭！
+-  文章版权，如需要则开启,不开启默认关闭！
+-  评论拦截，默认是开启,关键词语以及其它的都默认拦截为待审核
 
 > 版本1.3.0 
 
