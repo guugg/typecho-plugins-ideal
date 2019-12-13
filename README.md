@@ -1,6 +1,19 @@
 # typecho-plugins-ideal
 Typecho beautification plug-in based on handsome theme and other functions.   https://803344.xyz/
 
+> 更新到1.3.2
+
+-  新增实验功能  H2-H6标题悬停美化
+-  新增实验功能  把引用换成容器
+-  新增实验功能  短代码美化
+-  新增相册加长，让显示更好看
+-  新增了复制弹窗提示
+
+-  新增自定义实验功能的配色  主色-辅色-阴影色
+-  新增复制弹窗自定义内容
+
+
+
 
 > 更新到1.3.1
 

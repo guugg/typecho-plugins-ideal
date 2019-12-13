@@ -5,7 +5,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * <div class="WechatFansSet"><br /><a href="https://803344.xyz/51.html/" title="插件因兴趣于闲暇时间所写，故会有代码不规范、不专业和  bug的情况，但完美主义促使代码还说得过去，如有bug或使用问题进行反馈即可。">鼠标轻触查看备注</a>&nbsp;<a href="https://803344.xyz/zfb.jpg" target="_blank">支付宝打赏</a>&nbsp;<a href="https://803344.xyz/51.html/" target="_blank">反馈</a></div><style>.WechatFansSet a{background: #4DABFF;padding: 5px;color: #fff;}</style>
  * @package Ideal 
  * @author 小宇宙
- * @version 1.3.1
+ * @version 1.3.2
  * @link http://803344.xyz
  */
 
@@ -168,7 +168,7 @@ $form->addItem(new Title_ideal('鼠标点击特效','&nbsp;&nbsp;&nbsp;&nbsp;&nb
     $form->addInput($bubbleSpeed);
 $form->addItem(new EndSymbol_ideal(2));
 
-
+$form->addItem(new Title_ideal('Handsome魔改样式','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下设置基于Handsome魔化,诺其它主题方可自测'));
 $handsomecss = new Checkbox_ideal('handsomecss', array(
         'focus' => _t('首页悬停图片放大超出隐藏'),
         'rotation' => _t('鼠标经过头像转动并放大'),
@@ -179,8 +179,25 @@ $handsomecss = new Checkbox_ideal('handsomecss', array(
         'centered' => _t('文章标题居中'),
         'typechoanniu' => _t('开启文章快捷语法'),
         'yijiandaka' => _t('评论添加一键打卡功能'),
-    ), NULL, "Handsome魔改样式", NULL);
+        'bthovering' => _t('实验功能--H2-H6标题悬停美化(自定义主题色)'),
+        'containers' => _t('实验功能--使用>引用变容器(自定义主题色)'),
+        'ideal_code' => _t('实验功能--短代码美化(自定义主题色)'),
+        'idealjc_img' => _t('文章相册,相册列表均加长'),
+        'layertc' => _t('复制弹窗提示')
+    ), NULL, "Handsome样式选项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验功能", "实验功能可能会造成样式破坏,谨慎使用，标题悬停-引用容器-相册加长理论正常的");
 $form->addInput($handsomecss);
+    $Handsomezs = new Text_ideal('Handsomezs', null,"#d18f39", "实验功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主色", "如果未设置实验功能,该项就不会起到作用");
+    $form->addInput($Handsomezs);
+    $Handsomefs = new Text_ideal('Handsomefs', null,"#d18f39", "实验功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;辅色", "如果未设置实验功能,该项就不会起到作用");
+    $form->addInput($Handsomefs);
+    $Handsomeyys = new Text_ideal('Handsomeyys', null,"#d18f39", "实验功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阴影色", "如果未设置实验功能,该项就不会起到作用；注意：这里不能设置透明色。正确为：#ff0000。后台默认透明10%");
+    $form->addInput($Handsomeyys);
+    $layertcnr = new Text_ideal('layertcnr', null,"复制成功,欢迎使用Ideal插件！", "复制弹窗自定义内容", "如果复制弹窗提示未启用，则该内容无效！");
+    $form->addInput($layertcnr);
+$form->addItem(new EndSymbol_ideal(2));
+
+
+
 
 
 $layout = new Typecho_Widget_Helper_Layout();
@@ -781,12 +798,19 @@ JS;
     }
 
     public static function header(){
+        $zhutise = Typecho_Widget::widget('Widget_Options')->plugin('Ideal')->Handsomezs;
+        $fuzhuse = Typecho_Widget::widget('Widget_Options')->plugin('Ideal')->Handsomefs;
+        $yinyingse = Typecho_Widget::widget('Widget_Options')->plugin('Ideal')->Handsomeyys;
         $focus = '.index-post-img{overflow:hidden}.item-thumb{transition:all .3s}.item-thumb:hover{transform:scale(1.1)}';
         $rotation = '.img-full{width:100px;border-radius:50%;animation:light 4s ease-in-out infinite;transition:.5s}.img-full:hover{transform:scale(1.15) rotate(720deg)}@keyframes light{0%{box-shadow:0 0 4px red}25%{box-shadow:0 0 16px #0f0}50%{box-shadow:0 0 4px #00f}75%{box-shadow:0 0 16px #0f0}100%{box-shadow:0 0 4px red}}';
         $Beat = '.btn-pay{animation:star .5s ease-in-out infinite alternate}@keyframes star{from{transform:scale(1)}to{transform:scale(1.1)}}';
         $slider = '::-webkit-scrollbar{width:3px;height:16px;background-color:rgba(255,255,255,0)}::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);border-radius:10px;background-color:rgba(255,255,255,0)}::-webkit-scrollbar-thumb{border-radius:10px;-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);background-color:#555}';
         $Hovering = '.blog-post .panel:not(article){transition:all .3s}.blog-post .panel:not(article):hover{transform:translateY(-10px);box-shadow:0 8px 10px rgba(73,90,47,.47)}';
         $centered = '.panel h2{text-align:center}.post-item-foot-icon{text-align:center}';
+        $bthovering = '#post-content h1,#post-content h2,#post-content h3,#post-content h4,#post-content h5,#post-content h6{position:relative;margin:20px 0 32px!important;color:#8492a6!important;-webkit-transition:.25s!important;transition:.25s!important}#post-content h2:before,#post-content h3:before,#post-content h4:before,#post-content h5:before,#post-content h6:before{content:"";position:absolute;left:0;bottom:-8px;display:block;width:30px;height:3px;background:-webkit-gradient(linear,left top,left bottom,color-stop(30%,' . $fuzhuse . '),color-stop(70%,' . $zhutise . '));background:linear-gradient(' . $fuzhuse . ' 30%,' . $zhutise . ' 70%);box-shadow:0 3px 12px ' . $yinyingse . ' !important;border-radius:4px;-webkit-transition:.25s;transition:.25s;z-index:1}#post-content h2:hover:before,#post-content h3:hover:before,#post-content h4:hover:before,#post-content h5:hover:before,#post-content h6:hover:before{content:"";position:absolute;display:block;width:3em;height:4px;background-color:#eff2f7;left:0;bottom:-7px}';
+        $containers = 'blockquote{position:relative;margin:28px 0 16px!important;padding:10px 20px!important;width:-webkit-fit-content!important;width:-moz-fit-content!important;width:fit-content!important;max-width:100%!important;border-radius:10px!important;color:#fff!important;text-shadow:0 -1px ' . $zhutise . '!important;box-shadow:0 3px 12px ' . $yinyingse . '!important;background:-webkit-gradient(linear,left top,right top,from(' . $zhutise . '),to(' . $fuzhuse . '))!important;background:linear-gradient(90deg,' . $zhutise . ',' . $fuzhuse . ')!important}#post-content blockquote{border-left:3px solid #cd59d2!important;width:100%!important}';
+        $ideal_code = 'code{background-color:' . $yinyingse . '10!important;border-radius:4px!important;font-size:14px!important}';
+        $idealjc_img = '.album-thumb,.image-thumb{height:232px!important}.img-wrap{height:200px!important}';
         if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('focus', Helper::options()->plugin('Ideal')->handsomecss)):
             echo '
             <style type="text/css">
@@ -821,6 +845,31 @@ JS;
             echo '
             <style type="text/css">
             ' . $centered . '
+            </style>';
+        endif;
+
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('bthovering', Helper::options()->plugin('Ideal')->handsomecss)):
+            echo '
+            <style type="text/css">
+            ' . $bthovering . '
+            </style>';
+        endif;
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('containers', Helper::options()->plugin('Ideal')->handsomecss)):
+            echo '
+            <style type="text/css">
+            ' . $containers . '
+            </style>';
+        endif;
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('ideal_code', Helper::options()->plugin('Ideal')->handsomecss)):
+            echo '
+            <style type="text/css">
+            ' . $ideal_code . '
+            </style>';
+        endif;
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('idealjc_img', Helper::options()->plugin('Ideal')->handsomecss)):
+            echo '
+            <style type="text/css">
+            ' . $idealjc_img . '
             </style>';
         endif;
     }
@@ -865,6 +914,18 @@ JS;
 		</script>
         <?php
         endif;
+        
+        
+        if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('layertc', Helper::options()->plugin('Ideal')->handsomecss)):
+        ?>
+        <script src="//lib.baomitu.com/layer/3.1.1/layer.js"></script>
+        <script type="text/javascript">
+            document.body.oncopy = function() {layer.msg('<?php $layertcnr = Typecho_Widget::widget('Widget_Options')->plugin('Ideal')->layertcnr; echo $layertcnr;?>');};
+		</script>
+        <?php
+        endif;
+
+
 
         // 动态彩带
         $Bubbling = Helper::options()->plugin('Ideal')->Bubbling;
@@ -917,7 +978,6 @@ JS;
             if (!empty(Helper::options()->plugin('Ideal')->handsomecss) && in_array('commentTyping', Helper::options()->plugin('Ideal')->handsomecss)):
             echo '<script type="text/javascript" src="' . $commentTyping . '" async defer></script>' . PHP_EOL;
             endif;
-            
     }
     
     // 自定快捷语法
@@ -956,7 +1016,7 @@ JS;
 		</script>
 		<?php
         endif;
-
+       
     }
 
     public static function Comments() {
