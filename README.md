@@ -38,3 +38,25 @@ Typecho beautification plug-in based on handsome theme and other functions.   ht
 -  鼠标点击特色 （jQuery库、气泡设置、文字气泡、爱心气泡、喷墨气泡）
 -  文章版权 （作者名、文章链接、文章标题）
 -  typecho后台插件配置面板美化。
+
+
+>  图片浏览（简单几张介绍）  
+
+-  插件主页
+![插件主页](https://803344.xyz/usr/uploads/2019/12/1139471942.jpg)
+
+-  美化功能
+![美化功能](https://803344.xyz/usr/uploads/2019/12/2411292470.jpg)
+
+-  其他功能
+![其他功能](https://803344.xyz/usr/uploads/2019/12/1895792017.jpg)
+
+-  动态背景
+![动态背景](https://803344.xyz/usr/uploads/2019/12/1904525478.jpg)
+
+
+>  更多的介绍可以到我博客上浏览
+
+快到年了比较忙，维护时间减少。 可以通过留言说明你的想法，不固定时间查看。
+
+[小宇宙的blog](https://803344.xyz)
